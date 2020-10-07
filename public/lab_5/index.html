@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andrew Garcia's Lab 4</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <h1>Andrew Garcia's Lab 4</h1>
+        <form action="/api" method="post">
+          <ul class="flex-outer">
+            <li>
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="fname" maxlength="140" />
+            </li>
+            <li>
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" maxlength="140" />
+            </li>
+            <li>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" />
+            </li>
+            <li>
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" />
+            </li>
+            <li>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" cols="33">
+This is some default message text.</textarea
+              >
+            </li>
+            <li>
+              <p>Age</p>
+              <ul class="flex-inner">
+                <li>
+                  <input
+                    type="checkbox"
+                    id="eighteen_to_thirtyfive"
+                    name="eighteen_to_thirtyfive"
+                  />
+                  <label for="eighteen_to_thirtyfive">18-35</label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="thirtyfive_to_fifty"
+                    name="thirtyfive_to_fifty"
+                  />
+                  <label for="thirtyfive_to_fifty">35-50</label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="fifty_to_sixtyfive"
+                    name="fifty_to_sixtyfive"
+                  />
+                  <label for="fifty_to_sixtyfive">50-65</label>
+                </li>
+              </ul>
+            </li>
+            <li class="buttons">
+              <button type="submit" id="submit" name="submit">
+                Submit Form
+              </button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+    <script src="main.js"></script>
+    <script>
+      function testFunction() {
+        fetch("/api")
+          .then(response => response.text())
+          .then(response => {
+            console.log(response);
+
+            // replace the contents of your header element and your page title with the value you got back from your Fetch request
+            const myTitle = document.querySelector("title");
+            myTitle.innerText = response;
+            const myHeading = document.querySelector("h1");
+            myHeading.innerText = response;
+
+            // change your page's background color by changing the CSS
+            document.querySelector("body").style.background = "maroon";
+
+            // Center your form by adding "margin: 0 auto;" to an element selected using the .flex-outer class
+            document.querySelector(".flex-outer").style.margin = "0 auto";
+
+            // change your "age" and age labels (18-35,etc) to "Fruits" and three fruit-based labels
+            checkContainer.innerText = "Fruits";
+            const myLabel = document.querySelectorAll(".flex-inner label");
+            const fruits = ["mango", "avocado", "tangelo"];
+
+            fruits.forEach(fruit => {
+              console.log(fruit);
+            });
+
+            myLabel.forEach((label, i) => {
+              label.innerText = fruits[i];
+            });
+
+            // fruits.forEach(fruit => {
+            //   myLabel.forEach(label => {
+            //     label.innerText = fruit;
+            //   });
+            // });
+          });
+      }
+    </script>
+  </body>
+</html>
